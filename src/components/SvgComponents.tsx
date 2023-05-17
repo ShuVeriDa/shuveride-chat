@@ -25,7 +25,7 @@ export const DefaultAvatarSVG: FC<ISvgComponentsProps> = () => {
 
 export const NewMessageSVG: FC<ISvgComponentsProps> = (
   {
-    onClick, styles, style
+    onClick, styles
   }
 ) => {
   return (
