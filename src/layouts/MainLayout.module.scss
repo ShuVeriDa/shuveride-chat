@@ -1,0 +1,16 @@
+.wrapper {
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+  width: 1600px;
+
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 100px auto 0;
+    width: 100%;
+    //max-width: 1076px;
+    max-width: 1600px;
+  }
+}

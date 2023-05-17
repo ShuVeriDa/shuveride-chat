@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: #F0F2F5;
+  height: 73px;
+  width: 480px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 480px;
+    flex-direction: row;
+    padding-right: 16px;
+    position: relative;
+
+    .inputWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      position: relative;
+      left: -50px;
+
+      .input {
+        width: 200px;
+
+        input {
+          width: inherit;
+          border-radius: 6px;
+          padding: 4px 10px;
+          outline: none;
+          border: none;
+        }
+      }
+    }
+
+
+    .svg {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      //
+      svg {
+        color: #54656f;
+      }
+
+      .btnDisabled {
+        color: red;
+      }
+
+      .btnSuccess {
+        color: green;
+      }
+
+      .btnDefault {
+        color: #54656f;
+      }
+    }
+  }
+}

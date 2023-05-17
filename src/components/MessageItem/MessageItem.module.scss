@@ -1,0 +1,39 @@
+.wrapper {
+  //width: 641px;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-bottom: 2px;
+  width: 100%;
+
+  .container {
+    background: #D9FDD3;
+    max-width: 641px;
+    border-radius: 8px;
+    padding: 6px 7px 8px 9px;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+
+    .message {
+      font-size: 14px;
+      //width: 90px;
+      max-width: 641px;
+      word-break: break-word;
+    }
+
+    .time {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      font-size: 11px;
+      margin-left: 10px;
+      position: relative;
+      bottom: 0;
+      color: #667781;
+      //right: 10px;
+    }
+  }
+
+
+}

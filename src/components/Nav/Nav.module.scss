@@ -1,0 +1,15 @@
+.nav {
+  width: 481px;
+  box-sizing: border-box;
+
+
+  border-right: 1px solid #E9EDEF;
+
+  .container {
+    background: #fff;
+    min-height: 700px;
+    max-height: 700px;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+}

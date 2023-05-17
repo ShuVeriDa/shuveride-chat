@@ -1,0 +1,84 @@
+.wrapper {
+  width: 1120px;
+  background: #EFEAE2;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+
+  .messagesList {
+    min-height: 637px;
+    max-height: 630px;
+    padding: 10px 60px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    //align-content: end;
+    //justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .writeMessage {
+    width: 1120px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    //align-content: center;
+    padding: 5px 30px 5px;;
+    box-sizing: border-box;
+    height: 63px;
+    background: #F0F2F5;
+    //flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+
+      //.input {
+      //  display: flex;
+      //  flex-direction: column;
+      //  justify-content: center;
+      //  height: 42px;
+      //  width: 990px;
+      //  border: 0;
+      //  box-sizing: border-box;
+      //
+      //  input {
+      //    border: none;
+      //    outline: none;
+      //    padding: 9px 12px;
+      //    background: #fff;
+      //    height: inherit;
+      //    width: inherit;
+      //    border-radius: 8px;
+      //  }
+      //}
+
+      .btn {
+        position: relative;
+        top: 2px;
+        border: none;
+        
+        &:hover {
+          cursor: pointer;
+        }
+
+
+        svg {
+          color: #63747D;
+          width: 24px;
+          height: 24px;
+        }
+    }
+  }
+
+
+}
+
+
+}
