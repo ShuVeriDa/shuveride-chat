@@ -16,8 +16,6 @@ export const MainLayout: FC<MainLayoutPropsType> = ({idInstance, apiTokenInstanc
 
   return (
     <div className={styles.wrapper}>
-
-
       <div className={styles.content}>
         <Nav idInstance={idInstance}
              apiTokenInstance={apiTokenInstance}/>

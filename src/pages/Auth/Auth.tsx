@@ -6,8 +6,8 @@ import logo from '../../assets/logo.png'
 
 import {SubmitButton} from "../../components/SubmitButton/SubmitButton";
 import {IAuthInputType} from "../../types/auth.interface.ts";
-import {Input} from "../../components/Input/Input.tsx";
 import {useNavigate} from "react-router-dom";
+import {Input} from "../../components/Input/Input.tsx";
 
 interface ILoginProps {
   idInstance: string
@@ -24,7 +24,10 @@ export const Auth: FC<ILoginProps> = ({setApiTokenInstance, setIdInstance}) => {
   const onSubmit: SubmitHandler<IAuthInputType> = (data) => {
     setIdInstance(data.idInstance)
     setApiTokenInstance(data.apiTokenInstance)
+    localStorage.setItem('idInstance', data.idInstance);
+    localStorage.setItem('apiTokenInstance', data.apiTokenInstance);
     navigate('/')
+    reset()
   }
 
   return (
@@ -42,31 +45,18 @@ export const Auth: FC<ILoginProps> = ({setApiTokenInstance, setIdInstance}) => {
               <h2 className={styles.title}>Вход</h2>
             </div>
             <Input {...register('idInstance', {
-                required: "idInstance обязателен", /*pattern: {
-                    value: validEmail,
-                    message: 'Пожалуйста, введите действительный idInstance'
-                  }*/
-              }
-            )}
-                   title={'idInstance'}
-                   value={''}
-                   placeholder={'idInstance'}
+              required: 'idInstance обязательно'
+            })}
+                    placeholder={'idInstance'}
+                    styles={stylesInput}
                    error={errors.idInstance}
-                   styles={stylesInput}
             />
             <Input {...register('apiTokenInstance', {
-                required: "apiTokenInstance обязателен",/* pattern: {
-                  value: validEmail,
-                  message: 'Пожалуйста, введите действительный apiTokenInstance'
-                }*/
-              }
-            )}
-                   title={'apiTokenInstance'}
-                   value={''}
+              required: 'apiTokenInstance обязательно'
+            })}
                    placeholder={'apiTokenInstance'}
                    styles={stylesInput}
                    error={errors.apiTokenInstance}
-
             />
           </div>
 

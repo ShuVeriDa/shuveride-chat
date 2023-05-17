@@ -1,7 +1,7 @@
-import {useMemo} from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {MessageService} from "../services/message.service.ts";
 import {ICreateMessage, IDataChatId} from "../types/mesage.inteface.ts";
+import {useMemo} from "react";
 
 export const useMessageQuery = (idInstance: string, apiTokenInstance: string, chatId?: string) => {
   const getChats = useQuery({
@@ -9,22 +9,23 @@ export const useMessageQuery = (idInstance: string, apiTokenInstance: string, ch
     queryKey: ['chats'],
   })
 
-
   const client = useQueryClient()
 
   const getMessages = useMutation({
     mutationFn: (data: IDataChatId) => MessageService.fetchMessages(data, idInstance, apiTokenInstance),
-    onSuccess: () => {
-      client.invalidateQueries(['message', chatId])
-    }
+    // mutationKey: ['messages'],
   })
 
-  const useGetMessages = (data: IDataChatId, idInstance: string, apiTokenInstance: string) => {
-    return useQuery({
-      queryFn: () => MessageService.fetchMessages(data, idInstance, apiTokenInstance),
-      queryKey: ['message', data.chatId],
-    });
-  }
+  // const useGetMessages = (data: IDataChatId, idInstance: string, apiTokenInstance: string) => {
+  //   return useQuery({
+  //     queryFn: async () => {
+  //      const res = await MessageService.fetchMessages(data, idInstance, apiTokenInstance)
+  //       return res
+  //     },
+  //     queryKey: ['message', chatId],
+  //     refetchInterval: 5000,
+  //   });
+  // }
 
   const createMessage = useMutation({
     mutationFn: (data: ICreateMessage) => MessageService.createMessage(data, idInstance, apiTokenInstance),
@@ -34,10 +35,7 @@ export const useMessageQuery = (idInstance: string, apiTokenInstance: string, ch
   })
 
   return useMemo(() => ({
-    useGetMessages,
-    getChats,
-    getMessages,
-    createMessage,
+    getMessages, createMessage, getChats
+  }), [ getMessages, createMessage, getChats])
 
-  }), [useGetMessages, getChats, getMessages, createMessage,])
 }

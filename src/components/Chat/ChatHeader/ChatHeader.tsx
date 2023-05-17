@@ -27,9 +27,6 @@ export const ChatHeader: FC<IChatRoomHeaderProps> = () => {
     }
   }
 
-
-  console.log(isVisible)
-
   const onClickOutsideHandler = (event: MouseEvent) => {
     if (
       refInput.current &&

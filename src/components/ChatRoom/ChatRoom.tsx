@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './ChatRoom.module.scss';
 import stylesInput from '../Input/InputWriteMessage.module.scss'
 import {ChatRoomHeader} from "../Chat/ChatRoomHeader/ChatRoomHeader.tsx";
@@ -8,7 +8,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {MessageItem} from "../MessageItem/MessageItem.tsx";
 import {useMessageQuery} from "../../react-query/useMessageQuery.ts";
 import {useParams} from "react-router-dom";
-import {ICreateMessage} from "../../types/mesage.inteface.ts";
+import {ICreateMessage, IFetchMessage} from "../../types/mesage.inteface.ts";
+import {MessageService} from "../../services/message.service.ts";
 
 interface IChatRoomProps {
   idInstance: string
@@ -17,51 +18,68 @@ interface IChatRoomProps {
 
 export const ChatRoom: FC<IChatRoomProps> = ({idInstance, apiTokenInstance}) => {
   const {id} = useParams()
-  const {createMessage, getMessages} = useMessageQuery(idInstance, apiTokenInstance, id)
+  const {createMessage} = useMessageQuery(idInstance, apiTokenInstance, id)
 
-  const {mutate: fetchMessages, data: messages, isSuccess} = getMessages
   const {mutateAsync: create} = createMessage
 
   const {register, handleSubmit, formState: {errors}, reset} = useForm<ICreateMessage>({mode: 'onChange'})
 
+  // const { data: messages } = useGetMessages({ chatId: id!, count: 100 }, idInstance, apiTokenInstance);
+
+  const [messages, setMessages] = useState<IFetchMessage[]>([])
+
+  const fetchMessages = async () => {
+    const res = await MessageService.fetchMessages({chatId: id!, count: 100}, idInstance, apiTokenInstance)
+    setMessages(res)
+  }
+
   useEffect(() => {
-    fetchMessages({chatId: id!, count: 100})
-  }, [fetchMessages, id])
+    fetchMessages()
+  }, [id])
 
-  console.log(messages)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchMessages();
+    }, 5000);
 
-  console.log(id, 'id')
+    return () => {
+      clearInterval(interval);
+    };
+  }, [messages]);
 
 
   const onSubmit: SubmitHandler<ICreateMessage> = async (data) => {
+    setMessages(prev => [{textMessage: data.message}, ...prev])
     await create({chatId: id!, message: data.message})
+
+    setTimeout(() => {
+      fetchMessages()
+    }, 5000)
     reset()
   }
 
   return (
     <div className={styles.wrapper}>
-
       <ChatRoomHeader name={id!}/>
-      <div className={styles.messagesList} >
-        {isSuccess && messages.map((message, i) => {
+      <div className={styles.messagesList}>
+        {messages?.map((message, i) => {
           return <MessageItem message={message}
                               key={message.idMessage ? message.idMessage : i}
+
           />
         })}
       </div>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.writeMessage}>
           <div className={styles.container}>
-            <Input {...register('message')
-              } styles={stylesInput} />
+            <Input {...register('message')}
+                   error={errors.message}
+                   styles={stylesInput}
+            />
             <button className={styles.btn}><MessageSubmitSVG/></button>
           </div>
-
         </div>
       </form>
-
-
     </div>
   );
 };

@@ -11,12 +11,8 @@ interface NavPropsType {
 }
 
 export const Nav: FC<NavPropsType> = ({idInstance, apiTokenInstance}) => {
-
   const {getChats} = useMessageQuery(idInstance, apiTokenInstance)
   const {data: chats} = getChats
-/*  const chatOne = '89635940930@c.us'
-  const chatTwo = '89635940530@c.us'*/
-/*  const filteredChats = chats?.filter(chat => chat.id === chatOne || chat.id === chatTwo ) //Оставил два чата, которые мне нужны*/
 
   return (
     <div className={styles.nav}>

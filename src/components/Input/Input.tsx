@@ -2,18 +2,20 @@ import {ChangeEvent, forwardRef, InputHTMLAttributes} from 'react';
 import {FieldError} from "react-hook-form";
 
 interface IInputProps {
-  value?: string
+  onChangeSome?: (str: string) => void
   error?: FieldError | undefined | any
   styles?: { readonly [key: string]: string }
-  onChangeSome?: (el: string) => void
   placeholder?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & IInputProps>(
   (
-    {error, styles,placeholder,onChangeSome,
-    },ref
+    {
+      onChangeSome,
+      error, styles, placeholder, ...rest
+    }, ref
   ) => {
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       if (onChangeSome) {
         onChangeSome(e.currentTarget.value)
@@ -22,18 +24,15 @@ export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputE
 
     return (
       <div className={styles?.input}>
-          <input type={'text'}
-                 onChange={onChangeHandler}
-                 placeholder={placeholder}
-                 ref={ref}
-          />
+        <input type={'text'}
+               {...rest}
+               onChange={onChangeHandler}
+               placeholder={placeholder}
+               ref={ref}
+        />
         {error && <div className={styles?.errorWrapper}>
           {error && error.type && <div className={styles?.error}>{error.message}</div>}
         </div>}
-
-
       </div>
     );
   })
-
-Input.displayName = 'Input'

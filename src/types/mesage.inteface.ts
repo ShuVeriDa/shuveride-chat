@@ -19,15 +19,15 @@ export interface IFetchChats {
 }
 
 export interface IFetchMessage {
-  type: string,
-  idMessage: string,
-  timestamp: number,
-  typeMessage: string,
-  chatId: string,
+  type?: string,
+  idMessage?: string,
+  timestamp?: number,
+  typeMessage?: string,
+  chatId?: string,
   textMessage: string,
-  extendedTextMessage: IExtendedTextMessage,
-  statusMessage: string,
-  sendByApi: boolean
+  extendedTextMessage?: IExtendedTextMessage,
+  statusMessage?: string,
+  sendByApi?: boolean
 
 }
 export interface IExtendedTextMessage {

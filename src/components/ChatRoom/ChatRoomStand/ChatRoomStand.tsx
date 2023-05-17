@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import styles from './ChatRoomStand.module.scss';
 import {ClearMainSVG} from "../../SvgComponents.tsx";
+
 interface IChatRoomStandProps {
 }
 
