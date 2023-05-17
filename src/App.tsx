@@ -20,6 +20,14 @@ function App() {
     }
   }, [setIdInstance, setApiTokenInstance, getIdInstance, getApiTokenInstance]);
 
+  if (!idInstance || !apiTokenInstance) {
+    return <Auth idInstance={idInstance!}
+                 setIdInstance={setIdInstance}
+                 apiTokenInstance={apiTokenInstance!}
+                 setApiTokenInstance={setApiTokenInstance}
+    />
+  }
+
   return (
     <Routes>
       <Route path={'/auth'} element={<Auth idInstance={idInstance!}

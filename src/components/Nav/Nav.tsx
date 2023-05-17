@@ -14,6 +14,7 @@ export const Nav: FC<NavPropsType> = ({idInstance, apiTokenInstance}) => {
   const {getChats} = useMessageQuery(idInstance, apiTokenInstance)
   const {data: chats} = getChats
 
+
   return (
     <div className={styles.nav}>
       <ChatHeader/>
