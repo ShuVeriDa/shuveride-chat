@@ -8,7 +8,7 @@ interface IMessageItemProps {
 }
 
 export const MessageItem: FC<IMessageItemProps> = ({message}) => {
-  const date = new Date(message?.timestamp! * 1000);
+  const date = new Date(message.timestamp! * 1000);
   const createdAt = `${date.getHours()}:${date.getMinutes()}`
 
   return (
