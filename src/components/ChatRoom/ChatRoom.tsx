@@ -18,7 +18,8 @@ interface IChatRoomProps {
 
 export const ChatRoom: FC<IChatRoomProps> = ({idInstance, apiTokenInstance}) => {
   const {id} = useParams()
-  const {createMessage} = useMessageQuery(idInstance, apiTokenInstance, id)
+  const chatId = `${id}@c.us`
+  const {createMessage} = useMessageQuery(idInstance, apiTokenInstance, chatId)
 
   const {mutateAsync: create} = createMessage
 
@@ -29,13 +30,13 @@ export const ChatRoom: FC<IChatRoomProps> = ({idInstance, apiTokenInstance}) => 
   const [messages, setMessages] = useState<IFetchMessage[]>([])
 
   const fetchMessages = async () => {
-    const res = await MessageService.fetchMessages({chatId: id!, count: 100}, idInstance, apiTokenInstance)
+    const res = await MessageService.fetchMessages({chatId: chatId!, count: 100}, idInstance, apiTokenInstance)
     setMessages(res)
   }
 
   useEffect(() => {
     fetchMessages()
-  }, [id])
+  }, [chatId])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,7 +51,7 @@ export const ChatRoom: FC<IChatRoomProps> = ({idInstance, apiTokenInstance}) => 
 
   const onSubmit: SubmitHandler<ICreateMessage> = async (data) => {
     setMessages(prev => [{textMessage: data.message}, ...prev])
-    await create({chatId: id!, message: data.message})
+    await create({chatId: chatId!, message: data.message})
 
     setTimeout(() => {
       fetchMessages()
@@ -60,7 +61,7 @@ export const ChatRoom: FC<IChatRoomProps> = ({idInstance, apiTokenInstance}) => 
 
   return (
     <div className={styles.wrapper}>
-      <ChatRoomHeader name={id!}/>
+      <ChatRoomHeader name={chatId!}/>
       <div className={styles.messagesList}>
         {messages?.map((message, i) => {
           return <MessageItem message={message}

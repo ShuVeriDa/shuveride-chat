@@ -10,11 +10,14 @@ interface IChatRoomListProps {
 
 export const ChatList: FC<IChatRoomListProps> = ({chat}) => {
   const navigate = useNavigate()
-  const name = chat.name ? chat.name : chat.id.slice(0, 11)
+  const chatId = chat.id.slice(0, 11)
+  const name = chat.name ? chat.name : chatId
+
+  console.log(chat.id)
 
   return (
     <div className={styles.wrapper}
-         onClick={() => navigate(`/room/${chat.id}`)}
+         onClick={() => navigate(`/room/${chatId}`)}
     >
       <div className={styles.container}>
         <AvatarComponent />

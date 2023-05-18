@@ -20,6 +20,13 @@ function App() {
     }
   }, [setIdInstance, setApiTokenInstance, getIdInstance, getApiTokenInstance]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('idInstance');
+    localStorage.removeItem('apiTokenInstance');
+    setIdInstance(null);
+    setApiTokenInstance(null);
+  };
+
   if (!idInstance || !apiTokenInstance) {
     return <Auth idInstance={idInstance!}
                  setIdInstance={setIdInstance}
@@ -37,7 +44,9 @@ function App() {
       />}
       />
       <Route path={'/'} element={<MainLayout idInstance={idInstance!}
-                                             apiTokenInstance={apiTokenInstance!}/>}>
+                                             apiTokenInstance={apiTokenInstance!}
+                                             handleLogout={handleLogout}
+      />}>
         <Route path={'/room/:id'} element={<ChatRoom idInstance={idInstance!}
                                                  apiTokenInstance={apiTokenInstance!}
         />}

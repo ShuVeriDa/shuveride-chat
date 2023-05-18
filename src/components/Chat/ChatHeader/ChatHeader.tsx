@@ -16,10 +16,8 @@ export const ChatHeader: FC<IChatRoomHeaderProps> = () => {
   const [isVisible, setVisible] = useState(false)
   const [number, setNumber] = useState('')
   const onClickHandler = () => {
-    const room = number + '@c.us'
-
-    if (isVisible && room.length === 16) {
-      navigate(`/room/${room}`)
+    if (isVisible && number.length === 11) {
+      navigate(`/room/${number}`)
       setNumber('')
       setVisible(false)
     } else {

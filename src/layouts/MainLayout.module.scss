@@ -2,6 +2,7 @@
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
   width: 1600px;
+  position: relative;
 
 
   .content {
@@ -12,5 +13,19 @@
     width: 100%;
     //max-width: 1076px;
     max-width: 1600px;
+  }
+}
+
+.logout {
+  position: absolute; /**/
+  width: 25px;
+  z-index: 1;
+  top: 25px;
+  right: 20px;
+  fill: #54656F;
+
+  &:hover {
+    cursor: pointer;
+    fill: darkred;
   }
 }
