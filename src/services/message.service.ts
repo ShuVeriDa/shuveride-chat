@@ -3,8 +3,8 @@ import {ICreateMessage, IDataChatId, IFetchChats, IFetchMessage} from "../types/
 import {getContentType} from "../api/api.helper.ts";
 
 export const axiosOptions = {
-    // baseURL: process.env.REACT_APP_SERVER_URL,
-    baseURL: 'https://api.green-api.com',
+    baseURL: import.meta.env.VITE_REACT_APP_API_URL,
+    // baseURL: 'https://api.green-api.com',
     headers: getContentType()
 }
 
