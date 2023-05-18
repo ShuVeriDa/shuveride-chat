@@ -9,12 +9,8 @@ function App() {
   const getIdInstance =  localStorage.getItem('idInstance');
   const getApiTokenInstance =  localStorage.getItem('apiTokenInstance');
 
-
-
-
   const [idInstance, setIdInstance] = useState(getIdInstance)
   const [apiTokenInstance, setApiTokenInstance] = useState(getApiTokenInstance)
-
 
   useEffect(() => {
     if (getIdInstance && getApiTokenInstance) {
